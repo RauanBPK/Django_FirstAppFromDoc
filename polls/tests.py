@@ -17,6 +17,24 @@ def create_question(question_text, days):
     return Question.objects.create(question_text=question_text, pub_date=time)
 
 
+class QuestionResultsViewTest(TestCase):
+    def test_future_question(self):
+        """
+        The results view of a future question should return a 404 not found
+        """
+        future_question = create_question(question_text='Future question', days=30)
+        response = self.client.get(reverse('polls:results', args=(future_question.id,)))
+        self.assertEqual(response.status_code, 404)
+
+    def test_past_question(self):
+        """
+        The results view of a past question should be displayed
+        """
+        past_question = create_question(question_text="Past question", days=-10)
+        response = self.client.get(reverse('polls:results', args=(past_question.id,)))
+        self.assertContains(response, past_question.question_text)
+
+
 class QuestionDetailViewTest(TestCase):
     def test_future_question(self):
         """
