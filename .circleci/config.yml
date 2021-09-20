@@ -12,5 +12,5 @@ jobs:
 workflows:
   heroku-deploy:
     jobs:
-      - -test
+      - test
       - heroku/deploy-via-git
