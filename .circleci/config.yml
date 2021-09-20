@@ -11,6 +11,7 @@ jobs:
       - run:
           name: Run django tests
           command: |
+            sudo pip install
             python manage.py test
       - store_test_results:
           path: test-results
