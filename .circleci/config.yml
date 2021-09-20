@@ -1,18 +1,8 @@
 version: 2.1
 orbs:
   heroku: circleci/heroku@0.0.10
-jobs:
-  test:
-    docker:
-      - image: cimg/python:3.9
-    steps:
-      - run:
-          command: |
-           ls
 workflows:
   heroku-deploy:
     jobs:
-      - test
-      - heroku/deploy-via-git:
-          requires:
-            - test
+      - heroku/deploy-via-git
+
