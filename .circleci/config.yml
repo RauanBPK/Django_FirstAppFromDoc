@@ -8,7 +8,6 @@ jobs:
       - image: cimg/python:3.9
     steps:
       - checkout
-      - python/install-packages
       - run:
           name: Run django tests
           command: |
