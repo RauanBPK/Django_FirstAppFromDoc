@@ -8,7 +8,7 @@ jobs:
     steps:
       - run:
           command: |
-           pwd
+           ls
 workflows:
   heroku-deploy:
     jobs:
