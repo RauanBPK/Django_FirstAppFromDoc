@@ -1,12 +1,15 @@
 version: 2.1
 orbs:
   heroku: circleci/heroku@0.0.10
-workflows:
-  heroku-test:
-    jobs:
+jobs:
+  build:
+    steps:
       - run:
+          name: Running tests
           command: |
+            . venv/bin/activate
             python manage.py test
+workflows:
   heroku-deploy:
     jobs:
       - heroku/deploy-via-git
