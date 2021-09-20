@@ -1,7 +1,27 @@
 version: 2.1
 orbs:
   heroku: circleci/heroku@0.0.10
+
+jobs:
+  test:
+    docker:
+      - image: cimg/python:3.9
+    steps:
+      - checkout
+      - python/install-packages
+      - run:
+          name: Run django tests
+          command: |
+            python manage.py test
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: test-results
+          destination: tr1
 workflows:
   heroku-deploy:
     jobs:
-      - heroku/deploy-via-git
+      - test
+      - heroku/deploy-via-git:
+          requires:
+            - test
