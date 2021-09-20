@@ -8,7 +8,7 @@ jobs:
     steps:
       - run:
           command: |
-           python test_django/manage.py test
+           pwd
 workflows:
   heroku-deploy:
     jobs:
